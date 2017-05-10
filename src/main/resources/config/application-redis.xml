@@ -1,0 +1,76 @@
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:jee="http://www.springframework.org/schema/jee"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 连接池配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 最大连接数 -->
+        <property name="maxTotal" value="${redis.poolConfig.maxTotal}" />
+        <!-- 最大空闲连接数 -->
+        <property name="maxIdle" value="${redis.poolConfig.maxIdle}" />
+        <!-- 每次释放连接的最大数目 -->
+        <property name="numTestsPerEvictionRun" value="${redis.poolConfig.numTestsPerEvictionRun}" />
+        <!-- 释放连接的扫描间隔（毫秒） -->
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.poolConfig.timeBetweenEvictionRunsMillis}" />
+        <!-- 连接最小空闲时间 -->
+        <property name="minEvictableIdleTimeMillis" value="${redis.poolConfig.minEvictableIdleTimeMillis}" />
+        <!-- 连接空闲多久后释放, 当空闲时间>该值 且 空闲连接>最大空闲连接数 时直接释放 -->
+        <property name="softMinEvictableIdleTimeMillis" value="${redis.poolConfig.softMinEvictableIdleTimeMillis}" />
+        <!-- 获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 -->
+        <property name="maxWaitMillis" value="${redis.poolConfig.maxWaitMillis}" />
+        <!-- 在获取连接的时候检查有效性, 默认false -->
+        <property name="testOnBorrow" value="${redis.poolConfig.testOnBorrow}" />
+        <!-- 在空闲时检查有效性, 默认false -->
+        <property name="testWhileIdle" value="${redis.poolConfig.testWhileIdle}" />
+        <!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true -->
+        <property name="blockWhenExhausted" value="${redis.poolConfig.blockWhenExhausted}" />
+    </bean>
+
+    <!-- redis 连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="convertPipelineAndTxResults" value="${redis.connection.convertPipelineAndTxResults}"/>
+        <property name="hostName" value="${redis.connection.hostName}"/>
+        <property name="password" value="${redis.connection.password}"/>
+        <property name="port" value="${redis.connection.port}"/>
+        <property name="timeout" value="${redis.connection.timeout}"/>
+        <property name="usePool" value="${redis.connection.usePool}"/>
+    </bean>
+
+    <!-- redis 模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>-->
+            <!--<bean class="org.springframework.data.redis.serializer.JacksonJsonRedisSerializer"/>-->
+            <!--<bean class="org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer"/>-->
+        </property>
+
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <!-- redis 组件初始化 -->
+    <bean class="org.jon.lv.redis.Initialization" autowire="byType">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
+</beans>

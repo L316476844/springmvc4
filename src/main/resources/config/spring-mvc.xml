@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <context:component-scan base-package="org.jon.lv">
+    </context:component-scan>
+
+    <context:annotation-config />
+
+    <context:property-placeholder location="classpath:app_env.properties"/>
+
+
+    <mvc:annotation-driven/>
+
+    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
+    <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
+    <!-- 过滤掉所有的静态资源，把静态资源交给服务器，spirngmvc自己不处理 -->
+    <mvc:default-servlet-handler/>
+
+    <bean id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"/>
+
+    <!-- 要求id必须是 multipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设定默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <!-- 设定文件上传的最大值10MB，10*1024*1024,如果一次性上传多个文件，则只的时候所有文件的总和 -->
+        <property name="maxUploadSize" value="10485760"></property>
+    </bean>
+
+    <!--拦截器 -->
+    <mvc:interceptors>
+        <!--多个拦截器,顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <bean class="org.jon.lv.interceptors.AppInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
+
+
+
