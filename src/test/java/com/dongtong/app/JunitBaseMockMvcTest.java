@@ -1,7 +1,7 @@
 package com.dongtong.app;
 
-import com.shfc.common.base.UUIDUtils;
 import org.jon.lv.redis.RedisUtil;
+import org.jon.lv.utils.UUIDUtils;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,6 @@ public class JunitBaseMockMvcTest {
 
         Long currentUserId = 12L;
 
-        RedisUtil.set("tokenKey", currentUserId, 1800);
+        RedisUtil.set(tokenKey, currentUserId, 1800);
     }
 }
