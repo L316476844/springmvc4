@@ -1,6 +1,6 @@
-package com.dongtong.app.utils;
+package org.jon.lv.utils;
 
-import com.dongtong.app.JunitBaseMockMvcTest;
+import org.jon.lv.JunitBaseMockMvcTest;
 import org.jon.lv.redis.RedisUtil;
 import org.junit.Test;
 

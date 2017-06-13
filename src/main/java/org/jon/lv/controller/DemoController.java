@@ -1,12 +1,11 @@
 package org.jon.lv.controller;
 
-import com.shfc.common.result.ResultDO;
-import com.shfc.mybatis.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.jon.lv.annotation.UnLoginLimit;
 import org.jon.lv.dto.TestDTO;
+import org.jon.lv.result.ResultDO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 

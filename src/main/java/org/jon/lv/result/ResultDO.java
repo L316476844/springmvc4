@@ -1,6 +1,5 @@
 package org.jon.lv.result;
 
-import com.shfc.common.result.ErrorCode;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -41,6 +40,10 @@ public class ResultDO<T> implements Serializable {
      */
     private T data;
 
+    /**
+     * 异常
+     */
+    private Throwable exception;
 
     public boolean isSuccess() {
         return success;
@@ -67,18 +70,20 @@ public class ResultDO<T> implements Serializable {
         this.errCode = errCode;
     }
 
-    public void setErrorCode(ErrorCode errorCode) {
-        this.errCode = errorCode.getErrorCode();
-        this.errMsg = errorCode.getErrorMsg();
-        this.success = false;
-    }
-
     public T getData() {
         return data;
     }
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Throwable getException() {
+        return exception;
+    }
+
+    public void setException(Throwable exception) {
+        this.exception = exception;
     }
 
     @Override

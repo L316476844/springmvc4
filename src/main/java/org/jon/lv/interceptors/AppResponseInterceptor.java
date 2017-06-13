@@ -1,8 +1,8 @@
 package org.jon.lv.interceptors;
 
 import com.alibaba.fastjson.JSON;
-import com.shfc.common.base.Logger;
-import com.shfc.common.result.ResultDO;
+import org.jon.lv.result.ResultDO;
+import org.jon.lv.utils.Logger;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

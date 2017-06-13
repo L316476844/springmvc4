@@ -1,4 +1,4 @@
-package com.dongtong.app;
+package org.jon.lv;
 
 import org.jon.lv.redis.RedisUtil;
 import org.jon.lv.utils.UUIDUtils;
