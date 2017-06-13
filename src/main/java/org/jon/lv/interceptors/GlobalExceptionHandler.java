@@ -22,9 +22,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 
 /**
- * @Package com.dongtong.app.exception.RestExceptionHandler
  * @Description: RestExceptionHandler
- * @Company:上海房产
  * @Copyright: Copyright (c) 2016
  * Author lv bin
  * @date 2017/3/17 9:35

@@ -16,9 +16,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 
 /**
- * @Package com.shfc.cloud.interceptors.CloudResponseInterceptor
  * @Description: 统一响应结果处理
- * @Company:上海房产
  * @Copyright: Copyright (c) 2016
  * Author lv bin
  * @date 2017/3/17 10:45
@@ -28,7 +26,6 @@ import java.util.Date;
 public class AppResponseInterceptor implements ResponseBodyAdvice {
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
-
         return true;
     }
 
