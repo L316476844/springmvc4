@@ -74,6 +74,7 @@
     </bean>
 
     <bean id="redisHttpSessionConfiguration"  class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration" >
-        <property name="maxInactiveIntervalInSeconds" value="120" />
+        <!-- session有效时间 -->
+        <property name="maxInactiveIntervalInSeconds" value="1800" />
     </bean>
 </beans>
