@@ -1,9 +1,11 @@
-# springmvc4
+# springmvc4 <br>
 
-拦截器校验token
+拦截器校验token <br>
 
-全局异常统一处理
+全局异常统一处理 <br>
 
-免登陆拦截器
+免登陆拦截器 <br>
 
-swagge2配置
+swagge2配置 <br>
+
+基于redis分布式session <br>

@@ -43,7 +43,7 @@ public class ResultDO<T> implements Serializable {
     /**
      * 异常
      */
-    private Throwable exception;
+    private Exception exception;
 
     public boolean isSuccess() {
         return success;
@@ -78,11 +78,11 @@ public class ResultDO<T> implements Serializable {
         this.data = data;
     }
 
-    public Throwable getException() {
+    public Exception getException() {
         return exception;
     }
 
-    public void setException(Throwable exception) {
+    public void setException(Exception exception) {
         this.exception = exception;
     }
 

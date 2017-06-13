@@ -9,6 +9,17 @@
     <param-value>classpath*:config/application-*.xml</param-value>
   </context-param>
 
+  <!-- 分布式Session共享Filter 这个filter需要放在所有filter链最前面-->
+  <filter>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
@@ -54,7 +65,6 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
